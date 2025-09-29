@@ -3,9 +3,10 @@
 Personal utilities for Emacs.
 
 File **clipboard.el**  
-   - function `xxx`
+   - function `my/insert-string-in-clipboard`  
+   - paste image from clipboard to file: see `images.el`
    
 File **images.el**  
-   - function `xxx`
+   - function `my/paste-image-from-clipboard-to-file`
    
 (end of README)
