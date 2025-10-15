@@ -7,6 +7,7 @@ File **clipboard.el**
    - paste image from clipboard to file: see `images.el`
    
 File **files.el**  
+   - function `my/copy-file-here`  
    - function `my/list-big-files-in-current-directory-and-subdirectories`  
    - function `my/list-directories-with-many-files-or-direct-subdirectories`  
    - function `my/list-directories-of-big-size`  
