@@ -1,6 +1,6 @@
 ;;; -*- lexical-binding: t; -*-
 
-(defun my/paste-image-from-clipboard-to-file (destination-file-with-path)
+(defun my/paste-image-from-clipboard-to-file-with-imagemagick (destination-file-with-path)
   "Paste image from clipboard fo file DESTINATION-FILE-WITH-PATH with ImageMagick.
 (v1, available in occisn/emacs-utils GitHub repository + adaptation)"
   (let* ((imagemagick-convert-program "c:/.../convert.exe")
