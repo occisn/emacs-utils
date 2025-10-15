@@ -14,6 +14,7 @@ File **files.el**
    - function `my/find-files-with-same-size-in-same-subdirectory`
    
 File **images.el**  
-   - function `my/paste-image-from-clipboard-to-file`
+   - function `my/paste-image-from-clipboard-to-file-with-imagemagick`  
+   - function `my/paste-image-from-clipboard-to-here`
    
 (end of README)
