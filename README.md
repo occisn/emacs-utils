@@ -38,4 +38,7 @@ File **zip.el**
    - function `my/list-zip-content`  
    - function `my/zip-add-to-archive-present-in-same-directory`
 
+File **thunderbird-and-eml-files**  
+   - function `eml-add-date-at-beginning-of-eml-file`
+
 (end of README)
