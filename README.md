@@ -22,7 +22,11 @@ File **files.el**
 File **images.el**  
    - function `my/paste-image-from-clipboard-to-file-with-imagemagick`  
    - function `my/paste-image-from-clipboard-to-here`
-   
+
+File **ocr.el**  
+   - function `my/insert-ocr-clipboard`  
+   - function `my/scanned-pdf-to-txt`
+
 File **pdf.el**  
    - function `my/pdf-burst`  
    - function `my/pdf-extract`  
