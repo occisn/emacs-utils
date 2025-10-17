@@ -22,5 +22,11 @@ File **files.el**
 File **images.el**  
    - function `my/paste-image-from-clipboard-to-file-with-imagemagick`  
    - function `my/paste-image-from-clipboard-to-here`
-   
+
+File **zip.el**  
+   - function `my/unzip`  
+   - function `my/zip-content-of-current-directory`  
+   - function `my/list-zip-content`  
+   - function `my/zip-add-to-archive-present-in-same-directory`
+
 (end of README)
