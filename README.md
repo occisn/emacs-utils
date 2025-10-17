@@ -6,6 +6,11 @@ File **clipboard.el**
    - function `my/insert-string-in-clipboard`  
    - paste image from clipboard to file: see `images.el`
    
+File **csv.el**  
+   - function `my/parse-csv-file-to-list`  
+   - function `my/write-CSV-to-file`  
+   - function `my/reconciliate-two-csv-files`
+   
 File **files.el**  
    - function `my/copy-file-here`  
    - function `my/list-big-files-in-current-directory-and-subdirectories`  
