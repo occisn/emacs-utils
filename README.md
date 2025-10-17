@@ -22,6 +22,11 @@ File **files.el**
 File **images.el**  
    - function `my/paste-image-from-clipboard-to-file-with-imagemagick`  
    - function `my/paste-image-from-clipboard-to-here`
+   
+File **pdf.el**  
+   - function `my/pdf-burst`  
+   - function `my/pdf-extract`  
+   - function `my/pdf-join`
 
 File **zip.el**  
    - function `my/unzip`  
