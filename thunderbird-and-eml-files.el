@@ -2,7 +2,7 @@
 
 (defun eml-add-date-at-beginning-of-eml-file ()
    "Add date at the beginning of eml file in dired.
-(v1, available in occisn/emacs-utils GitHub repository)"
+(v2, available in occisn/emacs-utils GitHub repository)"
    (interactive)
 
    (cl-labels ((replace-linux-slash-with-two-windows-slashes (path)
@@ -36,7 +36,7 @@ For instance: abc/def --> abc\\def"
 	    (file-directory (file-name-directory file-full-name))
 	    (file-name (file-name-nondirectory file-full-name))
 	    (file-name-slash-OK-accents-OK (replace-linux-slash-with-two-windows-slashes file-name))
-	    (file-name-without-extension (file-name-base file-full-name))
+	    ;; (file-name-without-extension (file-name-base file-full-name))
             (date-line nil))
        (when (not (or (string= (file-name-extension file-full-name) "eml") (string= (file-name-extension file-full-name) "EML") ))
          (error "Trying to extract date from a non-EML fil: %S" file-full-name))
