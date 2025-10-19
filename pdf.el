@@ -2,7 +2,7 @@
 
 (defun my/pdf-burst ()
   "Bursts PDF file on dired line.
-(v1, available in occisn/emacs-utils GitHub repository)"
+(v2, available in occisn/emacs-utils GitHub repository)"
   (interactive)
   (when (not (string-equal major-mode "dired-mode"))
     (error "Trying to burst a PDF file when not in dired-mode."))
@@ -20,7 +20,7 @@ For instance: abc/def --> abc\\def"
 	   (file-directory (file-name-directory file-full-name))
 	   (file-name (file-name-nondirectory file-full-name))
 	   (file-name-slash-OK-accents-OK (replace-linux-slash-with-two-windows-slashes file-name))
-	   (file-name-without-extension (file-name-base file-full-name))
+	   ;; (file-name-without-extension (file-name-base file-full-name))
 	   (output-directory file-directory)
 	   (output-directory-slash-OK-accents-OK (replace-linux-slash-with-two-windows-slashes output-directory))
 	   (cmd (concat "\"" pdftk-program "\""
@@ -39,7 +39,7 @@ For instance: abc/def --> abc\\def"
 
 (defun my/pdf-extract ()
   "Extracts pages from a PDF file on dired line.
-(v1, available in occisn/emacs-utils GitHub repository)"
+(v2, available in occisn/emacs-utils GitHub repository)"
   (interactive)
   (when (not (string-equal major-mode "dired-mode"))
     (error "Trying to extract from a PDF file when not in dired-mode."))
@@ -59,7 +59,7 @@ For instance: abc/def --> abc\\def"
 	   (file-directory (file-name-directory file-full-name))
 	   (file-name (file-name-nondirectory file-full-name))
 	   (file-name-slash-OK-accents-OK (replace-linux-slash-with-two-windows-slashes file-name))
-	   (file-name-without-extension (file-name-base file-full-name))
+	   ;; (file-name-without-extension (file-name-base file-full-name))
 	   (output-directory file-directory)
 	   (output-directory-slash-OK-accents-OK (replace-linux-slash-with-two-windows-slashes output-directory))
 	   (cmd (concat "\"" pdftk-program "\""
