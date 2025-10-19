@@ -3,7 +3,8 @@
 (defun my/org-copy-link-or-inline-code-or-verbatim-or-block ()
    "Copy link, inline code between = or ~ signs in org-mode, or content of org block.
 Fallback : current word.
-(v1, available in occisn/emacs-utils GitHub repository)"
+(v2, available in occisn/emacs-utils GitHub repository)
+(v1 around Sept.-Oct 2025)"
    (interactive)
    (let ((found nil))
      
@@ -44,7 +45,9 @@ Fallback : current word.
      
      ;; (3) org block?
      (unless found
-       (let ((element (org-element-context)))
+       (let ((content-begin nil)
+             (content-end nil)
+             (element (org-element-context)))
          ;; (message "element = %s" element)
          ;; (message "(org-element-type element) = %s" (org-element-type element))
          (while (and element
