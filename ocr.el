@@ -42,7 +42,7 @@ Uses Tesseract and ImageMagick.
 (defun my/scanned-pdf-to-txt ()
   "Convert scanned PDF file on dired line to text buffer.
 Uses Imagemagick and Tesseract.
-(v3, available in occisn/emacs-utils GitHub repository, v1 as of 2024-08-25)"
+(v4, available in occisn/emacs-utils GitHub repository, v1 as of 2024-08-25)"
   (interactive)
   
   (when (not (string-equal major-mode "dired-mode"))
@@ -65,7 +65,7 @@ For instance: abc/def --> abc\\def"
 	   (file-full-name-slash-OK-accents-OK (replace-linux-slash-with-two-windows-slashes file-full-name))
 	   ;; (file-directory (file-name-directory file-full-name))
 	   (file-name (file-name-nondirectory file-full-name))
-	   (file-name-slash-OK-accents-OK (replace-linux-slash-with-two-windows-slashes file-name))
+	   ;; (file-name-slash-OK-accents-OK (replace-linux-slash-with-two-windows-slashes file-name))
 	   ;; (file-name-without-extension (file-name-base file-full-name))
 
            (cmd1 (concat "\"" imagemagick-convert-program "\" " "-density 300x300 " "\"" file-full-name-slash-OK-accents-OK "\"" " " temp-directory "zabcd-%03d.jpg"))
