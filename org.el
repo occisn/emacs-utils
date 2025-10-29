@@ -148,6 +148,66 @@ Fallback : current word.
         (write-file temp-file-name)
         (kill-buffer)))))
 
+;; proposed by AI with personal supervision
+(defun my/org-copy-region-ready-to-be-pasted-into-Word-Teams-Thunderbird-Gmail ()
+  "Export Org-mode region to Windows CF_HTML clipboard format (including StartHTML, EndHTML, StartFragment, EndFragment markers).
+Clipboard can be pasted into Microsoft Word, Microsoft Teams, Thunderbird and Gmail.
+(v1 as of 2025-10-28, available in occisn/emacs-utils GitHub repository)"
+  (interactive)
+  (if (not (use-region-p))
+      (message "No active region to export")
+    (let* ((region-start (region-beginning))
+           (region-end (region-end))
+           (html-body (org-export-string-as
+                       (buffer-substring region-start region-end)
+                       'html t '(:with-toc nil 
+                                           :html-postamble nil
+                                           :preserve-breaks t))))
+      
+      ;; Extract body content and replace <p> tags with <br>
+      (setq html-body
+            (with-temp-buffer
+              (insert html-body)
+              (goto-char (point-min))
+              (if (re-search-forward "<body[^>]*>\\(\\(.\\|\n\\)*\\)</body>" nil t)
+                  (match-string 1)
+                html-body)))
+      
+      ;; Replace paragraph tags with line breaks
+      (setq html-body
+            (replace-regexp-in-string "<p[^>]*>" "" html-body))
+      (setq html-body
+            (replace-regexp-in-string "</p>" "<br>" html-body))
+      
+      ;; Build CF_HTML format (use \n only, Windows will handle conversion)
+      (let* ((html-fragment (concat "<!--StartFragment-->" html-body "<!--EndFragment-->"))
+             (html-full (concat "<html>\n<body>\n" html-fragment "\n</body>\n</html>"))
+             (header "Version:0.9\nStartHTML:%010d\nEndHTML:%010d\nStartFragment:%010d\nEndFragment:%010d\n")
+             (header-length (length (format header 0 0 0 0)))
+             (start-html header-length)
+             (end-html (+ start-html (string-bytes html-full)))
+             (start-fragment (+ start-html 
+                                (string-bytes (substring html-full 0 (string-match "<!--StartFragment-->" html-full)))
+                                (string-bytes "<!--StartFragment-->")))
+             (end-fragment (+ start-html (string-bytes (substring html-full 0 (string-match "<!--EndFragment-->" html-full)))))
+             (cf-html (concat (format header start-html end-html start-fragment end-fragment)
+                              html-full)))
+        
+        ;; Write to temp file and use PowerShell to set clipboard
+        (let ((temp-file (make-temp-file "cf-html-" nil ".txt")))
+          (with-temp-file temp-file
+            (set-buffer-file-coding-system 'utf-8-unix)
+            (insert cf-html))
+          
+          (call-process "powershell.exe" nil nil nil
+                        "-Command"
+                        (format "$content = Get-Content -Path '%s' -Raw -Encoding UTF8; Add-Type -AssemblyName System.Windows.Forms; $data = New-Object System.Windows.Forms.DataObject; $bytes = [System.Text.Encoding]::UTF8.GetBytes($content); $stream = New-Object System.IO.MemoryStream(,$bytes); $data.SetData('HTML Format', $stream); [System.Windows.Forms.Clipboard]::SetDataObject($data, $true); $stream.Close()"
+                                (replace-regexp-in-string "/" "\\\\" temp-file)))
+          
+          (delete-file temp-file)
+          (message "Region copied as CF_HTML to clipboard"))))))
+
+
 ;;; ===
 ;;; === PASTE CLIPBOARD
 
