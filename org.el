@@ -1,87 +1,130 @@
 ;;; -*- lexical-binding: t; -*-
 
+;;; === COPY BLOCK
+
 (defun my/org-copy-link-or-inline-code-or-verbatim-or-block ()
-   "Copy link, inline code between = or ~ signs in org-mode, or content of org block.
+  "Copy link, inline code between = or ~ signs in org-mode, or content of org block.
 Fallback : current word.
 (v2, available in occisn/emacs-utils GitHub repository)
 (v1 around Sept.-Oct 2025)"
-   (interactive)
-   (let ((found nil))
+  (interactive)
+  (let ((found nil))
      
-     ;; (1) inline code?
-     (let ((start-pos (point)))
-       (save-excursion
-         ;; Find the opening = before cursor
-         (when (re-search-backward "=" (line-beginning-position) t)
-           (let ((open-pos (point)))
-             (goto-char start-pos)
-             (when (re-search-forward "=" (line-end-position) t)
-               (let ((close-pos (point)))
-                 (when (and (> start-pos open-pos) (< start-pos close-pos))
-                   (let ((content (buffer-substring-no-properties (1+ open-pos) (1- close-pos))))
-                     (when (and (> (length content) 0)
-                                (not (string-match-p "\n" content)))
-                       (kill-new content)
-                       (setq found t)
-                       (message "Copied inline code: %s" content))))))))))
+    ;; (1) inline code?
+    (let ((start-pos (point)))
+      (save-excursion
+        ;; Find the opening = before cursor
+        (when (re-search-backward "=" (line-beginning-position) t)
+          (let ((open-pos (point)))
+            (goto-char start-pos)
+            (when (re-search-forward "=" (line-end-position) t)
+              (let ((close-pos (point)))
+                (when (and (> start-pos open-pos) (< start-pos close-pos))
+                  (let ((content (buffer-substring-no-properties (1+ open-pos) (1- close-pos))))
+                    (when (and (> (length content) 0)
+                               (not (string-match-p "\n" content)))
+                      (kill-new content)
+                      (setq found t)
+                      (message "Copied inline code: %s" content))))))))))
      
-     ;; (2) inline verbatim?
-     (unless found
-       (let ((start-pos (point)))
-         (save-excursion
-           ;; Find the opening = before cursor
-           (when (re-search-backward "~" (line-beginning-position) t)
-             (let ((open-pos (point)))
-               (goto-char start-pos)
-               (when (re-search-forward "~" (line-end-position) t)
-                 (let ((close-pos (point)))
-                   (when (and (> start-pos open-pos) (< start-pos close-pos))
-                     (let ((content (buffer-substring-no-properties (1+ open-pos) (1- close-pos))))
-                       (when (and (> (length content) 0)
-                                  (not (string-match-p "\n" content)))
-                         (kill-new content)
-                         (setq found t)
-                         (message "Copied inline verbatim: %s" content)))))))))))
+    ;; (2) inline verbatim?
+    (unless found
+      (let ((start-pos (point)))
+        (save-excursion
+          ;; Find the opening = before cursor
+          (when (re-search-backward "~" (line-beginning-position) t)
+            (let ((open-pos (point)))
+              (goto-char start-pos)
+              (when (re-search-forward "~" (line-end-position) t)
+                (let ((close-pos (point)))
+                  (when (and (> start-pos open-pos) (< start-pos close-pos))
+                    (let ((content (buffer-substring-no-properties (1+ open-pos) (1- close-pos))))
+                      (when (and (> (length content) 0)
+                                 (not (string-match-p "\n" content)))
+                        (kill-new content)
+                        (setq found t)
+                        (message "Copied inline verbatim: %s" content)))))))))))
      
-     ;; (3) org block?
-     (unless found
-       (let ((content-begin nil)
-             (content-end nil)
-             (element (org-element-context)))
-         ;; (message "element = %s" element)
-         ;; (message "(org-element-type element) = %s" (org-element-type element))
-         (while (and element
-                     (not (memq (org-element-type element)
-                                '(src-block example-block export-block quote-block verse-block center-block special-block comment-block))))
-           ;; (message "element = %s" element)
-           ;; (message "(org-element-type element) = %s" (org-element-type element))
-           (setq element (org-element-property :parent element)))
-         (when element
-           (save-excursion
-             (goto-char (org-element-property :begin element))
-             (forward-line 1)
-             (setq content-begin (point))
-             (re-search-forward "^#\\+END_" (org-element-property :end element) t)
-             (beginning-of-line)
-             (setq content-end (point))
-             (kill-ring-save content-begin content-end)
-             (setq found t)
-             (message "Org block content copied.")))))
+    ;; (3) org block?
+    (unless found
+      (let ((content-begin nil)
+            (content-end nil)
+            (element (org-element-context)))
+        ;; (message "element = %s" element)
+        ;; (message "(org-element-type element) = %s" (org-element-type element))
+        (while (and element
+                    (not (memq (org-element-type element)
+                               '(src-block example-block export-block quote-block verse-block center-block special-block comment-block))))
+          ;; (message "element = %s" element)
+          ;; (message "(org-element-type element) = %s" (org-element-type element))
+          (setq element (org-element-property :parent element)))
+        (when element
+          (save-excursion
+            (goto-char (org-element-property :begin element))
+            (forward-line 1)
+            (setq content-begin (point))
+            (re-search-forward "^#\\+END_" (org-element-property :end element) t)
+            (beginning-of-line)
+            (setq content-end (point))
+            (kill-ring-save content-begin content-end)
+            (setq found t)
+            (message "Org block content copied.")))))
 
-     ;; (4) Link in org-mode ?
-     (unless found
-       (let ((url (thing-at-point 'url t)))
-         (when url
-           (setq found t)
-           (kill-new url)
-           (message "Copied link: %s" url))))
+    ;; (4) Link in org-mode ?
+    (unless found
+      (let ((url (thing-at-point 'url t)))
+        (when url
+          (setq found t)
+          (kill-new url)
+          (message "Copied link: %s" url))))
 
-     ;; (5) Word ?
-     (unless found
-       (set found (my/copy-word)))
+    ;; (5) Word ?
+    (unless found
+      (set found (my/copy-word)))
      
-     (unless found
-       (message "No word, link, inline code, verbatim text or block found at point."))))
+    (unless found
+      (message "No word, link, inline code, verbatim text or block found at point."))))
+
+;;; === COPY TO CLIPBOARD
+
+(defun my/save-region-as-html (temp-file-name)
+   "Save region, otherwise buffer to HTML file.
+(v1, available in occisn/emacs-utils GitHub repository)"
+   (let* ((regionp (region-active-p))
+          (beg (and regionp (region-beginning)))
+          (end (and regionp (region-end)))
+	  (buf (current-buffer)))
+     (when (file-exists-p temp-file-name) (delete-file temp-file-name))
+     (with-temp-buffer
+       (insert-buffer-substring buf beg end)
+       (my-init--html-add-b-u-i-br-tags)
+       (insert "<?xml version=\"1.0\" encoding=\"utf-8\"?>")
+       (insert "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Strict//EN\"
+\"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd\">")
+       (insert "<html xmlns=\"http://www.w3.org/1999/xhtml\" lang=\"en\" xml:lang=\"en\">")
+       (insert "<html>")
+       (insert "<head>")
+       (insert "<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\"/>")
+       (insert "</head>")
+       (insert "<body>")
+       ;;(insert "<pre white-space=\"-moz-pre-wrap\">")
+       (insert "<font face='Calibri'>") ; size=\"-1\" 
+       (insert "<div style=\"white-space: pre-wrap;\">")
+       (insert "<div style=\"font-size:14.5px\">") ; to have Calibri 11
+       (goto-char (point-max))
+       (insert "</div>")               ; font-size
+       (insert "</div>")               ; white-space
+       (insert "</font>")
+       ;;(insert "</pre>")
+       (insert "</body>")
+       (insert "</html>")
+       ;; (set-buffer-file-coding-system 'utf-8)
+
+       ;; (2) Save buffer as temporary HTML file
+       (write-file temp-file-name)
+       (kill-buffer))))
+
+;;; === PASTE CLIPBOARD
 
 (defun my/paste-clipboard-as-raw-html ()
   "Insert raw HTML from the Windows clipboard (CF_HTML) into current buffer, with visible tags.

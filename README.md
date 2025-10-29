@@ -29,6 +29,7 @@ File **ocr.el**
 
 File **org.el**  
    - function `my/org-copy-link-or-inline-code-or-verbatim-or-block`  
+   - function `my/save-region-as-html`  
    - function `my/paste-clipboard-as-raw-html`  
    - function `my/html-to-org`  
    - function `my/paste-from-Teams-Word-as-org`
