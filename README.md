@@ -32,7 +32,7 @@ File **org.el**
    - function `my/save-region-as-html`  
    - function `my/paste-clipboard-as-raw-html`  
    - function `my/html-to-org`  
-   - function `my/paste-from-Teams-Word-as-org`
+   - function `my/org-paste-from-Teams-Word-as-org`
 
 File **pdf.el**  
    - function `my/pdf-burst`  

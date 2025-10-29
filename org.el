@@ -250,7 +250,7 @@ Fallback : current word.
     (string-trim (buffer-string))))
 ;; proposed by AI with personal supervision
 
-(defun my/paste-from-Teams-Word-as-org ()
+(defun my/org-paste-from-Teams-Word-as-org ()
   "Paste from clipboard and convert to org-mode format.
 Content of the clipboard may come from Microsoft Teams or Word.
 Does not work as such from Thunderbird. Not tested from Gmail.
