@@ -39,6 +39,9 @@ File **pdf.el**
    - function `my/pdf-burst`  
    - function `my/pdf-extract`  
    - function `my/pdf-join`
+   
+File **windows.el**  
+   - function `add-to-environment-variable`
 
 File **zip.el**  
    - function `my/unzip`  
