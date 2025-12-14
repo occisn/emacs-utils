@@ -9,4 +9,17 @@
        (setenv envt-variable-name (concat directory ";" envt-variable-content))
        (message "%s is added to %s environment variable." prog-name envt-variable-name))))
 
+(defun my--find-process (process-name)
+  "Check if a process with PROCESS-NAME is running on Windows.
+Returns t or nil.
+Example: (my--find-process 'chrome.exe'
+(v1, available in occisn/emacs-utils GitHub repository)"
+  (let ((processes (list-system-processes))
+        (found nil))
+    (dolist (pid processes found)
+      (let* ((attrs (process-attributes pid))
+             (comm (cdr (assoc 'comm attrs))))
+        (when (and comm (string-match-p process-name comm))
+          (setq found t))))))
+
 ;;; end

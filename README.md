@@ -41,8 +41,9 @@ File **pdf.el**
    - function `my/pdf-join`
    
 File **windows.el**  
-   - function `add-to-environment-variable`
-
+   - function `add-to-environment-variable`  
+   - function `my--find-process`
+   
 File **zip.el**  
    - function `my/unzip`  
    - function `my/zip-content-of-current-directory`  
