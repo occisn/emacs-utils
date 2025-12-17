@@ -12,7 +12,8 @@
 (defun my/delete-to-recycle-bin (file)
   "Move FILE to Windows Recycle Bin using PowerShell.
 Returns t on success, nil on failure.
-(v1, available in occisn/emacs-utils GitHub repository)"
+Note: (setq delete-by-moving-to-trash t) does not seem enough.
+(v1, available in occisn/emacs-utils GitHub repository, 2025-12-27)"
   (let* ((file-path (convert-standard-filename file))
          (ps-command (format 
                       "Add-Type -AssemblyName Microsoft.VisualBasic; [Microsoft.VisualBasic.FileIO.FileSystem]::DeleteFile('%s', 'OnlyErrorDialogs', 'SendToRecycleBin')"
