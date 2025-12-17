@@ -9,6 +9,21 @@
        (setenv envt-variable-name (concat directory ";" envt-variable-content))
        (message "%s is added to %s environment variable." prog-name envt-variable-name))))
 
+(defun my/delete-to-recycle-bin (file)
+  "Move FILE to Windows Recycle Bin using PowerShell.
+Returns t on success, nil on failure.
+(v1, available in occisn/emacs-utils GitHub repository)"
+  (let* ((file-path (convert-standard-filename file))
+         (ps-command (format 
+                      "Add-Type -AssemblyName Microsoft.VisualBasic; [Microsoft.VisualBasic.FileIO.FileSystem]::DeleteFile('%s', 'OnlyErrorDialogs', 'SendToRecycleBin')"
+                      file-path)))
+    (condition-case err
+        (progn
+          (call-process "powershell.exe" nil nil nil
+                        "-NoProfile" "-NonInteractive" "-Command" ps-command)
+          (not (file-exists-p file)))
+      (error nil))))
+
 (defun my--find-process (process-name)
   "Check if a process with PROCESS-NAME is running on Windows.
 Returns t or nil.
