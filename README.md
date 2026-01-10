@@ -24,7 +24,13 @@ File **files.el**
 File **images.el**  
    - function `my/paste-image-from-clipboard-to-file-with-imagemagick`  
    - function `my/paste-image-from-clipboard-to-here`
-
+   
+File **macros.el**  
+   - macro `aprogn`  
+   - macro `amapcar`  
+   - macro `awhen`  
+   - macro `aif`
+         
 File **ocr.el**  
    - function `my/insert-ocr-clipboard`  
    - function `my/scanned-pdf-to-txt`
