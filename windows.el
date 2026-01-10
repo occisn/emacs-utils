@@ -1,6 +1,6 @@
 ;;; -*- lexical-binding: t; -*-
 
-(defun add-to-environment-variable (envt-variable-name prog-name directory)
+(defun my/add-to-environment-variable (envt-variable-name prog-name directory)
    "Add DIRECTORY corresponding to PROG-NAME to environment variable ENVT-VARIABLE-NAME. DIRECTORY may have a final slash.
 (v1, available in occisn/emacs-utils GitHub repository)"
    (let ((envt-variable-content (getenv envt-variable-name)))

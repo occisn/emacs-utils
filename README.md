@@ -43,7 +43,7 @@ File **pdf.el**
    - function `my/pdf-join`
    
 File **windows.el**  
-   - function `add-to-environment-variable`  
+   - function `my/add-to-environment-variable`  
    - function `my/delete-to-recycle-bin`  
    - function `my--find-process`
    
