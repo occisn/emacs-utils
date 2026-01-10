@@ -4,7 +4,7 @@
   "Unzip file on dired line.
 (v1, available in occisn/emacs-utils GitHub repository)"
   (interactive)
-  (when (not (string-equal major-mode "dired-mode"))
+  (unless (string-equal major-mode "dired-mode")
     (error "Trying to unzip when not in dired-mode."))
   (when (> (length (dired-get-marked-files)) 1)
     (error "Trying to unzip several files."))
@@ -41,7 +41,7 @@ For instance: abc/def --> abc\\def"
   "Zip content of current directory into a zip archive.
 (v1, available in occisn/emacs-utils GitHub repository)"
   (interactive)
-  (when (not (string-equal major-mode "dired-mode"))
+  (unless (string-equal major-mode "dired-mode")
     (error "Trying to zip when not in dired-mode."))
   (cl-labels ((replace-linux-slash-with-two-windows-slashes (path)
                 "Return PATH string after having replaced slashes by two backslashes.
@@ -69,7 +69,7 @@ For instance: abc/def --> abc\\def"
   "List the content of zip file on dired line.
 (v1, available in occisn/emacs-utils GitHub repository)"
   (interactive)
-  (when (not (string-equal major-mode "dired-mode"))
+  (unless (string-equal major-mode "dired-mode")
     (error "Trying to list content of zip file when not in dired-mode."))
   (when (> (length (dired-get-marked-files)) 1)
     (error "Trying to list the content of several files."))
@@ -95,7 +95,7 @@ For instance: abc/def --> abc\\def"
 Attention: overwrite.
 (v1, available in occisn/emacs-utils GitHub repository)"
   (interactive)
-  (when (not (string-equal major-mode "dired-mode"))
+  (unless (string-equal major-mode "dired-mode")
     (error "Trying to add to zip archive when not in dired-mode."))
   (let ((files-to-add (dired-get-marked-files)))
     (message "marked files: %s" files-to-add)

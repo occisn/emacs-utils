@@ -45,7 +45,7 @@ Uses Imagemagick and Tesseract.
 (v4, available in occisn/emacs-utils GitHub repository, v1 as of 2024-08-25)"
   (interactive)
   
-  (when (not (string-equal major-mode "dired-mode"))
+  (unless (string-equal major-mode "dired-mode")
     (error "Scanned pdf to txt: not in dired mode."))
   (when (> (length (dired-get-marked-files)) 1)
     (error "Scanned pdf to txt: more than 1 file has been selected."))

@@ -4,7 +4,7 @@
    "Copy file as another file (adding ' (2)' at the end) in same dired folder.
 (v1, available in occisn/emacs-utils GitHub repository)"
    (interactive)
-   (when (not (string-equal major-mode "dired-mode"))
+   (unless (string-equal major-mode "dired-mode")
      (error "Trying to copy file when not in dired-mode."))
    (when (> (length (dired-get-marked-files)) 1)
      (error "Trying to copy several files in same folder."))
@@ -160,7 +160,7 @@ The list is printed on a separate buffer.
 Requires 'f' package.
 (v1, available in occisn/emacs-utils GitHub repository)"
   (interactive)
-  (when (not (string-equal major-mode "dired-mode"))
+  (unless (string-equal major-mode "dired-mode")
     (error "Not in dired-mode."))
   (let ((root default-directory)
 	(minimal-size (string-to-number (read-string "Minimal size in Mo (default = 100): " "" nil "100")))
@@ -233,7 +233,7 @@ Directories listed in ALREADY-OK-FOLDERS list are not investigated.
 Requires 'f' package.
 (v1, available in occisn/emacs-utils GitHub repository)"
   (interactive)
-  (when (not (string-equal major-mode "dired-mode"))
+  (unless (string-equal major-mode "dired-mode")
     (error "Trying to perform an my/list-directories-containing-zip-files when not in dired-mode."))
   (let ((already-OK-folders nil)
         (root default-directory)
@@ -271,7 +271,7 @@ Source: https://stackoverflow.com/questions/22403751/check-if-a-string-ends-with
 	                            nil)
 	                          nil ; not recursive
                                   ) 
-                         (when (not (null zip-files-and-sizes))
+                         (unless (null zip-files-and-sizes)
                            (setq sorted-zip-files-and-sizes (sort zip-files-and-sizes (lambda (a b) (> (cdr a) (cdr b)))))
                            (setq biggest-zip-file-and-size (car sorted-zip-files-and-sizes))
                            (if (cl-loop for suffix in already-OK-folders
@@ -319,7 +319,7 @@ Source: https://stackoverflow.com/questions/22403751/check-if-a-string-ends-with
 Presents the results as a dired buffer.
 (v2, available in occisn/emacs-utils GitHub repository; v1 as of December 21th, 2021)"
   (interactive)
-  (when (not (string-equal major-mode "dired-mode"))
+  (unless (string-equal major-mode "dired-mode")
     (error "Trying to perform my/find-files-with-same-size-in-same-subdirectory when not in dired-mode."))
   (cl-labels ((insert-directories-in-file-list (files)
                 "Take a list of files, and return the same list with directories intertwined.
@@ -333,7 +333,7 @@ d1/ d1/a.org d1/b.org d2/ d2/c.org d3/ d3/d.org
                   (cl-loop for filename in files
 	                   for dir1 = (file-name-directory filename)
 	                   do (progn
-		                (when (not (string= current-dir dir1))
+		                (unless (string= current-dir dir1)
 		                  (push dir1 files-intertwined-with-directories)
 		                  (setq current-dir dir1))
 		                (push filename files-intertwined-with-directories)))

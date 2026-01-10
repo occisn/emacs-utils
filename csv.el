@@ -140,7 +140,7 @@ If VALUE-COLUMN-1 and -2 are non nil, the sum of this column is calculated for e
             ;; -----------------
             ;; if account and voucher are provided, first try to put aside lines with account in -8, common voucher, and sum = 0
             (prov
-             (when (not (or (null account-column-2) (null voucher-column-2)))
+             (unless (or (null account-column-2) (null voucher-column-2))
                (let ((prov% nil)
                      (prov-ht (make-hash-table :test 'equal))
                      (data2-bis nil))
