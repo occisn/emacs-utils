@@ -18,7 +18,7 @@ Uses ImageMagick.
 (v1, available in occisn/emacs-utils GitHub repository)"
   (interactive)
 
-  (unless (string-equal major-mode "dired-mode")
+  (unless (string= major-mode "dired-mode")
     (error "Trying to paste image from clipboard while not in dired-mode"))
 
   (let* ((imagemagick-convert-program "c:/.../convert.exe")

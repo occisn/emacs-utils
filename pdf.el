@@ -4,7 +4,7 @@
   "Bursts PDF file on dired line.
 (v2, available in occisn/emacs-utils GitHub repository)"
   (interactive)
-  (unless (string-equal major-mode "dired-mode")
+  (unless (string= major-mode "dired-mode")
     (error "Trying to burst a PDF file when not in dired-mode."))
   (when (> (length (dired-get-marked-files)) 1)
     (error "Trying to burst several files."))
@@ -41,7 +41,7 @@ For instance: abc/def --> abc\\def"
   "Extracts pages from a PDF file on dired line.
 (v2, available in occisn/emacs-utils GitHub repository)"
   (interactive)
-  (unless (string-equal major-mode "dired-mode")
+  (unless (string= major-mode "dired-mode")
     (error "Trying to extract from a PDF file when not in dired-mode."))
   (when (> (length (dired-get-marked-files)) 1)
     (error "Trying to extract from several files."))
@@ -82,7 +82,7 @@ Caution: no accent in file names
 If necessary : M-x read-only-mode
 (v1, available in occisn/emacs-utils GitHub repository)"
   (interactive)
-  (unless (string-equal major-mode "dired-mode")
+  (unless (string= major-mode "dired-mode")
     (error "Trying to extract from a PDF file when not in dired-mode."))
   (cl-labels ((replace-linux-slash-with-two-windows-slashes (path)
                 "Return PATH string after having replaced slashes by two backslashes.

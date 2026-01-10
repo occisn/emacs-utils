@@ -25,7 +25,7 @@ For instance: abc/def --> abc\\def"
                        ((equal "Dec" month) 12)
                        (t (error "Month not recognized: %s" month))))) ; end of labels definitions
      
-     (unless (string-equal major-mode "dired-mode")
+     (unless (string= major-mode "dired-mode")
        (error "Trying to burst a PDF file when not in dired-mode."))
      (when (> (length (dired-get-marked-files)) 1)
        (error "Trying to add dates at the beginning of several files."))
