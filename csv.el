@@ -162,7 +162,7 @@ If VALUE-COLUMN-1 and -2 are non nil, the sum of this column is calculated for e
                                    (setq prov% (append prov% lines2))
                                  (setq data2-bis (append data2-bis lines2)))))
                  (unless (= (length data2) (+ (length data2-bis) (length prov%)))
-                   (error "Inconsistent lengths: data2 (%s) <> data2-bis (%s) + prov (%s)" (length data2) (length data2-bis) (length %prov)))
+                   (error "Inconsistent lengths: data2 (%s) <> data2-bis (%s) + prov (%s)" (length data2) (length data2-bis) (length prov%)))
                  (setq data2 data2-bis)
                  prov%)))
             ;; at this stage, prov contains the line of reconciliated "account in -8, common voucher, and sum = 0"
