@@ -1,5 +1,7 @@
 ;;; -*- lexical-binding: t; -*-
 
+(require 'cl-lib)
+
 ;;; ===
 ;;; === COPY BLOCK
 

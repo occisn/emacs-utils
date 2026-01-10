@@ -1,5 +1,7 @@
 ;;; -*- lexical-binding: t; -*-
 
+(require 'cl-lib)
+
 (defun my/unzip ()
   "Unzip file on dired line.
 (v1, available in occisn/emacs-utils GitHub repository)"

@@ -1,5 +1,7 @@
 ;;; -*- lexical-binding: t; -*-
 
+(require 'cl-lib)
+
 (defun my/pdf-burst ()
   "Bursts PDF file on dired line.
 (v2, available in occisn/emacs-utils GitHub repository)"
@@ -31,7 +33,7 @@ For instance: abc/def --> abc\\def"
            ;; Example of cmd line: "c:/Users/.../PDFTKBuilderPortable/App/pdftkbuilder/pdftk.exe" "c:/Users/.../Downloads/test.pdf" burst output "c:/Users/.../Downloads/page_%03d_of_XYZ.pdf"
            )
       (unless (or (string= (file-name-extension file-full-name) "pdf")
-                (string= (file-name-extension file-full-name) "PDF"))
+                  (string= (file-name-extension file-full-name) "PDF"))
         (error "Trying to burst a non-PDF file: %S" file-full-name))
       (message "Bursting (splitting) PDF file %S with %s" file-name pdftk-program-name)
       (call-process-shell-command cmd nil t)

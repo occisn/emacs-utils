@@ -1,24 +1,26 @@
 ;;; -*- lexical-binding: t; -*-
 
+(require 'cl-lib)
+
 (defun my/copy-file-here ()
-   "Copy file as another file (adding ' (2)' at the end) in same dired folder.
+  "Copy file as another file (adding ' (2)' at the end) in same dired folder.
 (v1, available in occisn/emacs-utils GitHub repository)"
-   (interactive)
-   (unless (string= major-mode "dired-mode")
-     (error "Trying to copy file when not in dired-mode."))
-   (when (> (length (dired-get-marked-files)) 1)
-     (error "Trying to copy several files in same folder."))
-   (let* ((current-path-and-name (car (dired-get-marked-files)))
-	  (current-path (file-name-directory current-path-and-name))
-          (current-name (file-name-nondirectory current-path-and-name))
-	  (suggested-new-name (concat (file-name-sans-extension current-name) " (2)." (file-name-extension current-name)))
-	  (new-name (read-string "Copy into: " suggested-new-name))
-          (new-path-and-name (concat current-path new-name)))
-     (message "Copying %s into %s within %s." current-name new-name current-path) 
-     (copy-file current-path-and-name new-path-and-name)
-     (revert-buffer)                     ; to update dired
-     (dired-goto-file new-path-and-name) ; cursor on new file
-     ))
+  (interactive)
+  (unless (string= major-mode "dired-mode")
+    (error "Trying to copy file when not in dired-mode."))
+  (when (> (length (dired-get-marked-files)) 1)
+    (error "Trying to copy several files in same folder."))
+  (let* ((current-path-and-name (car (dired-get-marked-files)))
+	 (current-path (file-name-directory current-path-and-name))
+         (current-name (file-name-nondirectory current-path-and-name))
+	 (suggested-new-name (concat (file-name-sans-extension current-name) " (2)." (file-name-extension current-name)))
+	 (new-name (read-string "Copy into: " suggested-new-name))
+         (new-path-and-name (concat current-path new-name)))
+    (message "Copying %s into %s within %s." current-name new-name current-path) 
+    (copy-file current-path-and-name new-path-and-name)
+    (revert-buffer)                     ; to update dired
+    (dired-goto-file new-path-and-name) ; cursor on new file
+    ))
 
 (defun my/list-big-files-in-current-directory-and-subdirectories ()
   "List big files in current dired directory and its sub-directories.

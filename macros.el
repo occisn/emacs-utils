@@ -1,5 +1,7 @@
 ;;; -*- lexical-binding: t; -*-
 
+(require 'cl-lib)
+
 (defmacro aprogn (&rest body)
   "Anaphoric progn.
 (v1, available in occisn/elisp-utils GitHub repository)"

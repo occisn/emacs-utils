@@ -1,5 +1,7 @@
 ;;; -*- lexical-binding: t; -*-
 
+(require 'cl-lib)
+
 (defun my/paste-image-from-clipboard-to-file-with-imagemagick (destination-file-with-path &optional wait-p)
   "Paste image from clipboard fo file DESTINATION-FILE-WITH-PATH with ImageMagick.
 If WAIT-P is true, wait for the command to be executed before returning (synchroneous). Otherwise, return immediately (asynchroneous).

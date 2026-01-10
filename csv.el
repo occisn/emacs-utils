@@ -1,20 +1,22 @@
 ;;; -*- lexical-binding: t; -*-
 
+(require 'cl-lib)
+
 (cl-defun my/parse-csv-file-to-list (input-file &key (separator ";") (verbose nil))
-   "Parse CSV file INPUT-FILE, structured with separator SEPARATOR, and return data as list of lists.
+  "Parse CSV file INPUT-FILE, structured with separator SEPARATOR, and return data as list of lists.
 (v1, available in occisn/emacs-utils GitHub repository)"
-   (when (null input-file) (error "File to be parsed is nil."))
-   (let ((result nil))
-     (with-temp-buffer
-       (insert-file-contents input-file)
-       (while (not (eobp))
-         (let* ((line (buffer-substring-no-properties
-                       (line-beginning-position) (line-end-position))))
-           (push (split-string line separator) result))
-         (forward-line 1))
-       (when verbose (message "File %s parsed, %s lines found" input-file (length result)))
-       (when (null result) (error "Content of file %s is null" input-file))
-       (reverse result))))
+  (when (null input-file) (error "File to be parsed is nil."))
+  (let ((result nil))
+    (with-temp-buffer
+      (insert-file-contents input-file)
+      (while (not (eobp))
+        (let* ((line (buffer-substring-no-properties
+                      (line-beginning-position) (line-end-position))))
+          (push (split-string line separator) result))
+        (forward-line 1))
+      (when verbose (message "File %s parsed, %s lines found" input-file (length result)))
+      (when (null result) (error "Content of file %s is null" input-file))
+      (reverse result))))
 ;; inspired by: https://gist.github.com/syohex/5487731
 
 ;; (require 'subr-x) ?
