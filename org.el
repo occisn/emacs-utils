@@ -81,7 +81,7 @@ Fallback : current word.
 
     ;; (5) Word ?
     (unless found
-      (set found (my/copy-word)))
+      (setq found (my/copy-word)))
      
     (unless found
       (message "No word, link, inline code, verbatim text or block found at point."))))
