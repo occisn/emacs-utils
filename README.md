@@ -35,6 +35,9 @@ File **ocr.el**
    - function `my/insert-ocr-clipboard`  
    - function `my/scanned-pdf-to-txt`
 
+File **ollama.el**  
+   - functions `my/ollama-call1` and `my/ollama-call2`
+
 File **org.el**  
    - function `my/org-copy-link-or-inline-code-or-verbatim-or-block`  
    - function `my/save-region-as-html`  
@@ -48,6 +51,9 @@ File **pdf.el**
    - function `my/pdf-extract`  
    - function `my/pdf-join`
    
+File **thunderbird-and-eml-files**  
+   - function `eml-add-date-at-beginning-of-eml-file`
+   
 File **windows.el**  
    - function `my/add-to-environment-variable`  
    - function `my/delete-to-recycle-bin`  
@@ -58,9 +64,6 @@ File **zip.el**
    - function `my/zip-content-of-current-directory`  
    - function `my/list-zip-content`  
    - function `my/zip-add-to-archive-present-in-same-directory`
-
-File **thunderbird-and-eml-files**  
-   - function `eml-add-date-at-beginning-of-eml-file`
    
 Any comment? Open an [issue](https://github.com/occisn/emacs-utils/issues), or start a discussion [here](https://github.com/occisn/emacs-utils/discussions) or [at profile level](https://github.com/occisn/occisn/discussions).
 
