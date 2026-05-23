@@ -226,7 +226,7 @@ Clipboard can be pasted into Microsoft Word, Microsoft Teams, Thunderbird and Gm
             (buffer-string)))
          ;; Extract fragment between <!--StartFragment--> and <!--EndFragment-->
          (fragment
-          (if (string-match "<!--StartFragment-->(.*)<!--EndFragment-->" html-raw)
+          (if (string-match "<!--StartFragment-->\\(\\(.\\|\n\\)*\\)<!--EndFragment-->" html-raw)
               (match-string 1 html-raw)
             html-raw)))
     (insert fragment)))
@@ -234,7 +234,7 @@ Clipboard can be pasted into Microsoft Word, Microsoft Teams, Thunderbird and Gm
 
 (defun my/html-to-org (html)
   "Convert HTML string to org-mode format.
-(v1 as of 2025-10-29, available in occisn/elisp-utils GitHub repository)"
+(v1 as of 2025-10-29, available in occisn/emacs-utils GitHub repository)"
   (with-temp-buffer
     (insert html)
     ;; Convert common HTML elements to org-mode

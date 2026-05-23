@@ -2,7 +2,7 @@
 
 (require 'cl-lib)
 
-(defun eml-add-date-at-beginning-of-eml-file ()
+(defun my/eml-add-date-at-beginning-of-eml-file ()
   "Add date at the beginning of eml file in dired.
 (v2, available in occisn/emacs-utils GitHub repository)"
   (interactive)

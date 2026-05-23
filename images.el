@@ -32,8 +32,8 @@ Uses ImageMagick.
     (cl-labels ((paste-image-from-clipboard-to-file-with-imagemagick (destination-file-with-path)
                   "Paste image from clipboard fo file DESTINATION-FILE-WITH-PATH with ImageMagick.
 (v1, available in occisn/emacs-utils GitHub repository + adaptations)"
-                  (unless (my-init--file-exists-p *imagemagick-convert-program*)
-                    (error "Unable to paste image from clipboard to file, since *imagemagick-convert-program* does not contain valid content: %s" *imagemagick-convert-program*))
+                  (unless (file-exists-p imagemagick-convert-program)
+                    (error "Unable to paste image from clipboard to file, since imagemagick-convert-program does not point to an existing file: %s" imagemagick-convert-program))
                   (let ((cmd (concat "\"" imagemagick-convert-program "\" " "clipboard: " destination-file-with-path)))
                     (message "Pasting image from clipboard to %s with ImageMagick." destination-file-with-path)
                     (call-process-shell-command cmd)))) ; end of labels definition

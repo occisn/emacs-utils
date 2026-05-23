@@ -32,7 +32,7 @@ Requires 'f' package.
     (error "Not in dired-mode."))
   (cl-labels ((file-size-Mo (filename)
                 "Return file size of FILENAME in Mo.
-(v1, available in occisn/elisp-utils GitHub repository)"
+(v1, available in occisn/emacs-utils GitHub repository)"
                 (round
                  (/
                   (file-attribute-size
@@ -41,7 +41,7 @@ Requires 'f' package.
               (add-number-grouping (number &optional separator)
                 "Return a string corresponding to NUMBER, which each 3-digit group separated by SEPARATOR, by default a comma.
 For instance: 123456 as a number--> 123,456 as a string
-(v1, available in occisn/elisp-utils GitHub repository)"
+(v1, available in occisn/emacs-utils GitHub repository)"
                 (let ((num (number-to-string number))
 	              (op (or separator ",")))
                   (while (string-match "\\(.*[0-9]\\)\\([0-9][0-9][0-9].*\\)" num)
@@ -101,12 +101,12 @@ Requires 'f' package.
     (error "Not in dired-mode."))
   (cl-labels ((nb-of-elements-in-directory (folder)
                 "Return number of elements in FOLDER, including sub-folders (no recursive investigation of subdirectories).
-(v1, available in occisn/elisp-utils GitHub repository)"
+(v1, available in occisn/emacs-utils GitHub repository)"
                 (- (length (directory-files folder)) 2))
               (add-number-grouping (number &optional separator)
                 "Return a string corresponding to NUMBER, which each 3-digit group separated by SEPARATOR, by default a comma.
 For instance: 123456 as a number--> 123,456 as a string
-(v1, available in occisn/elisp-utils GitHub repository)"
+(v1, available in occisn/emacs-utils GitHub repository)"
                 (let ((num (number-to-string number))
 	              (op (or separator ",")))
                   (while (string-match "\\(.*[0-9]\\)\\([0-9][0-9][0-9].*\\)" num)
@@ -172,7 +172,7 @@ Requires 'f' package.
         (start-time (current-time)))
     (cl-labels ((file-size-o (filename)
                   "Return file size of FILENAME in o.
-(derived from v1, available in occisn/elisp-utils GitHub repository)"
+(derived from v1, available in occisn/emacs-utils GitHub repository)"
                   (file-attribute-size (file-attributes filename)))
                 (list-size-of-directory-and-subdirectories (current-root)
                   "Compute size of CURRENT-ROOT directory by adding size of its files and recursively examining size of subdirectories.
@@ -190,7 +190,7 @@ During this process, each time a directory size exceeds MINIMAL-SIZE (bound in e
                 (add-number-grouping (number &optional separator)
                   "Return a string corresponding to NUMBER, which each 3-digit group separated by SEPARATOR, by default a comma.
 For instance: 123456 as a number--> 123,456 as a string
-(v1, available in occisn/elisp-utils GitHub repository)"
+(v1, available in occisn/emacs-utils GitHub repository)"
                   (let ((num (number-to-string number))
 	                (op (or separator ",")))
                     (while (string-match "\\(.*[0-9]\\)\\([0-9][0-9][0-9].*\\)" num)
@@ -246,7 +246,7 @@ Requires 'f' package.
     (cl-labels ((string-suffix-p (suffix str &optional ignore-case)
                   "Return t if STR finished by SUFFIX.
 Ignore case.
-(v1, available in occisn/elisp-utils GitHub repository)
+(v1, available in occisn/emacs-utils GitHub repository)
 Source: https://stackoverflow.com/questions/22403751/check-if-a-string-ends-with-a-suffix-in-emacs-lisp" 
                   (let ((begin2 (- (length str) (length suffix)))
                         (end2 (length str)))
@@ -256,7 +256,7 @@ Source: https://stackoverflow.com/questions/22403751/check-if-a-string-ends-with
                                            ignore-case))))
                 (file-size-Mo (filename)
                   "Return file size of FILENAME in Mo.
-(v1, available in occisn/elisp-utils GitHub repository)"
+(v1, available in occisn/emacs-utils GitHub repository)"
                   (round
                    (/ (file-attribute-size
                        (file-attributes filename))
@@ -329,7 +329,7 @@ For instance :
 d1/a.org d1/b.org d2/c.org d3/d.org
 -->
 d1/ d1/a.org d1/b.org d2/ d2/c.org d3/ d3/d.org
-(v1, available in occisn/elisp-utils GitHub repository)"
+(v1, available in occisn/emacs-utils GitHub repository)"
                 (let ((current-dir "")
 	              (files-intertwined-with-directories nil))
                   (cl-loop for filename in files

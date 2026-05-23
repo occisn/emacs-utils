@@ -48,7 +48,7 @@ If VALUE-COLUMN-1 and -2 are non nil, the sum of this column is calculated for e
                
                (string-remove-surrounding-quotes (s)
                  "Remove quotes at the beginning and at the end of a string.
-(v1, available in occisn/elisp-utils GitHub repository)"
+(v1, available in occisn/emacs-utils GitHub repository)"
                  (aprogn
                   s
                   (string-remove-prefix "\"" it)
