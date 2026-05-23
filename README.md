@@ -4,6 +4,12 @@ Personal utilities for Emacs.
 
 This project is a kind of shelf providing many functions. With a few clearly indicated exceptions, these functions are self-supporting. They do not require any dependency, or to be built/integrated in any specific way. Because "the truly reusable code is the one that you can simply copy-paste".
 
+## Table of contents
+
+- [Usage](#usage)
+- [Tags](#tags)
+- [Functions](#functions)
+
 ## Usage
 
 Each file is independent. Load only what you need:
